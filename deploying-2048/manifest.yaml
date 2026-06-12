@@ -1,0 +1,26 @@
+# deployment for 2048 app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: 2048-app
+  name: deployment-2048
+spec:
+  selector:
+    matchLabels:
+      project: app-2048
+      env: dev
+  replicas: 5
+  #pod definition
+  template:
+    metadata:
+    # These labesl are pod related labels
+      labels:
+        project: app-2048
+        env: dev
+    spec:
+      containers:
+      - image: public.ecr.aws/l6m2t8p7/docker-2048:latest
+        imagePullPolicy: Always
+        name: app-2048
+        ports:
+        - containerPort: 80
