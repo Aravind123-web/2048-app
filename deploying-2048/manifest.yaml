@@ -24,3 +24,18 @@ spec:
         name: app-2048
         ports:
         - containerPort: 80
+---
+# service for 2048 app
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: 2048-app
+  name: service-2048
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: NodePort
+  selector:
+    project: app-2048
